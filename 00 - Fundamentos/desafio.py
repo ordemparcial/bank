@@ -13,14 +13,14 @@ extrato = ""
 numero_saques = 0
 LIMITE_SAQUES = 3
 
-def depositar(valor):
+def depositar(saldo, valor, extrato):
     if valor > 0:
             saldo += valor
             extrato += f"Depósito: R$ {valor:.2f}\n"
     else:
             print("Operação falhou! O valor informado é inválido.")
 
-def sacar(valor):
+def sacar(saldo, valor, extrato):
     if valor > saldo:
             print("Operação falhou! Você não tem saldo suficiente.")
 
@@ -35,29 +35,25 @@ def sacar(valor):
     else:
             print("Operação falhou! O valor informado é inválido.")
 
-def gerar_extrato():
+def gerar_extrato(extrato):
         print("\n================ EXTRATO ================")
         print("Não foram realizadas movimentações." if not extrato else extrato)
         print(f"\nSaldo: R$ {saldo:.2f}")
         print("==========================================")
 
-while True:
-
+def main():
     opcao = input(menu)
-
     if opcao == "d":
         valor = float(input("Informe o valor do depósito: "))
-        depositar(valor)
-
+        depositar(saldo, valor, extrato)
     elif opcao == "s":
         valor = float(input("Informe o valor do saque: "))
-        sacar(valor)
-
+        sacar(saldo, valor, extrato)
     elif opcao == "e":
-        gerar_extrato()
-
+        gerar_extrato(extrato)
     elif opcao == "q":
         break
-
     else:
         print("Operação inválida, por favor selecione novamente a operação desejada.")
+
+main()
